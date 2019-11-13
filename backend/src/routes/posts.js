@@ -6,6 +6,14 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     const posts = await req.context.models.Post.findAll();
+    const total =  posts.length;
+    //res.set('x-total-count', 3);
+    //res.type('application/json');
+    res.set({
+        'Content-Type': 'application/json',
+        'Content-Range': `${posts} 0-${total}/${total}`,
+        //'Content-Range': `${posts 0-total/total}` 
+    })
     return res.send(posts);
 });
 

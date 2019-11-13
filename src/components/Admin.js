@@ -3,6 +3,7 @@ import { Admin as Administrator, Resource, ListGuesser } from 'react-admin';
 import axios from 'axios';
 import simpleRestProvider from 'ra-data-simple-rest'
 
+import AdminDash from './AdminDash.js'
 import { AdminList } from './AdminList';
 
 
@@ -34,10 +35,11 @@ class Admin extends Component {
     render() {
         
         const { posts } = this.state;
-        
+        for(let i=0; i<posts.length; i++)
+            console.log(posts[i].title);
         return(
-            <Administrator dataProvider={simpleRestProvider(posts)}>
-                <Resource name='Posts' list={ListGuesser} />
+            <Administrator dashboard={AdminDash} dataProvider={ simpleRestProvider(posts)} > 
+                <Resource name='posts' list={AdminList} /> 
             </Administrator>
         );
     }
